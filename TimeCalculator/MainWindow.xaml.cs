@@ -9,11 +9,11 @@ namespace TimeCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        TimeCalculatorViewModel tcm = new TimeCalculatorViewModel();
+        TimeCalculatorViewModel timeCalculatorViewModel = new TimeCalculatorViewModel();
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = tcm;
+            DataContext = timeCalculatorViewModel;
         }
     }
 }

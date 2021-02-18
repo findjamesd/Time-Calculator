@@ -1,4 +1,4 @@
-﻿<!-- James Odeyale - Group 1 -->
+﻿<!-- Group 1 - James Odeyale, Ashokchakravarthi Nagarajan -->
 
 <Window x:Class="TimeCalculator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -11,7 +11,18 @@
         MinWidth="800" 
         MinHeight="450"
         Background="#E3E3E3"
-        >
+>
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="tbResult">
+            <Setter Property="FontSize" Value="35" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="#333333" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Width" Value="600" />
+            <Setter Property="TextAlignment" Value="Left" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -100,57 +111,32 @@
             CornerRadius="5"
         >
             <StackPanel
-                Margin="0 30"
+                Margin="0 10"
                 HorizontalAlignment="Center"   
                 Orientation="Vertical"
                 Visibility="{Binding DisplayResult}"
             >
                 <TextBlock 
                     Text="{Binding DaysCalc}"
-                    FontSize="30"
-                    HorizontalAlignment="Center"
-                    Foreground="#333333" 
-                    FontWeight="Bold"
-                    TextWrapping="Wrap"
-                    Width="600"
-                    TextAlignment="Left"
-                
+                    Style="{StaticResource tbResult}"
                 >
                 </TextBlock>
             
                 <TextBlock 
                     Text="{Binding HoursCalc}"
-                    FontSize="30"
-                    Foreground="#333333" 
-                    FontWeight="Bold"
-                    TextWrapping="Wrap"
-                    TextAlignment="Left"
-                
+                    Style="{StaticResource tbResult}"
                 >
                 </TextBlock>
 
                 <TextBlock 
                     Text="{Binding MinuteCalc}"
-                    FontSize="30"
-                    HorizontalAlignment="Center"
-                    Foreground="#333333" 
-                    FontWeight="Bold"
-                    TextWrapping="Wrap"
-                    Width="600"
-                    TextAlignment="Left"
-                
+                    Style="{StaticResource tbResult}"
                 >
                 </TextBlock>
 
                 <TextBlock 
                     Text="{Binding SecondsCalc}"
-                    FontSize="30"
-                    HorizontalAlignment="Center"
-                    Foreground="#333333" 
-                    FontWeight="Bold"
-                    TextWrapping="Wrap"
-                    Width="600"
-                    TextAlignment="Left"
+                    Style="{StaticResource tbResult}"
                 >
                 </TextBlock>
             </StackPanel>

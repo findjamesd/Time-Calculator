@@ -105,7 +105,7 @@ namespace TimeCalculator.ViewModel
             if (seconds >= SECONDS_IN_A_DAY)
             {
                 DaysCalc = $"{seconds / SECONDS_IN_A_DAY} {(seconds / SECONDS_IN_A_DAY > 1 ? " Days" : " Day")}";
-                seconds = seconds % SECONDS_IN_A_DAY;
+                seconds %= SECONDS_IN_A_DAY;
             }
             else
             {
@@ -115,7 +115,7 @@ namespace TimeCalculator.ViewModel
             if (seconds >= SECONDS_IN_AN_HOUR)
             {
                 HoursCalc = $"{seconds / SECONDS_IN_AN_HOUR} {(seconds / SECONDS_IN_AN_HOUR > 1 ? " Hours" : " Hour")}";
-                seconds = seconds % SECONDS_IN_AN_HOUR;
+                seconds %= SECONDS_IN_AN_HOUR;
             }
             else
             {
@@ -125,7 +125,7 @@ namespace TimeCalculator.ViewModel
             if (seconds >= SECONDS_IN_A_MINUTE)
             {
                 MinuteCalc = $"{seconds / SECONDS_IN_A_MINUTE} {(seconds / SECONDS_IN_A_MINUTE > 1 ? " Minutes" : " Minute")}";
-                seconds = seconds % SECONDS_IN_A_MINUTE;
+                seconds %= SECONDS_IN_A_MINUTE;
             }
             else
             {

@@ -12,9 +12,6 @@
         MinHeight="450"
         Background="#E3E3E3"
         >
-    <Window.Resources>
-        
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -92,64 +89,71 @@
         />
         </Border>
 
-        <StackPanel
+        <Border 
+            BorderBrush="{Binding BorderControl}"
+            BorderThickness="2"
             Grid.Row="3"
             Grid.RowSpan="3"
             Grid.Column="1"
             Grid.ColumnSpan="2"
-            Margin="0 30"
-            HorizontalAlignment="Center"   
-            Orientation="Vertical"
-            Visibility="{Binding DisplayResult}"
+            Margin="3 10"
+            CornerRadius="5"
         >
-            <TextBlock 
-                Text="{Binding DaysCalc}"
-                FontSize="30"
-                HorizontalAlignment="Center"
-                Foreground="#333333" 
-                FontWeight="Bold"
-                TextWrapping="Wrap"
-                Width="600"
-                TextAlignment="Left"
-                
+            <StackPanel
+                Margin="0 30"
+                HorizontalAlignment="Center"   
+                Orientation="Vertical"
+                Visibility="{Binding DisplayResult}"
             >
-            </TextBlock>
+                <TextBlock 
+                    Text="{Binding DaysCalc}"
+                    FontSize="30"
+                    HorizontalAlignment="Center"
+                    Foreground="#333333" 
+                    FontWeight="Bold"
+                    TextWrapping="Wrap"
+                    Width="600"
+                    TextAlignment="Left"
+                
+                >
+                </TextBlock>
             
-            <TextBlock 
-                Text="{Binding HoursCalc}"
-                FontSize="30"
-                Foreground="#333333" 
-                FontWeight="Bold"
-                TextWrapping="Wrap"
-                TextAlignment="Left"
+                <TextBlock 
+                    Text="{Binding HoursCalc}"
+                    FontSize="30"
+                    Foreground="#333333" 
+                    FontWeight="Bold"
+                    TextWrapping="Wrap"
+                    TextAlignment="Left"
                 
-            >
-            </TextBlock>
+                >
+                </TextBlock>
 
-            <TextBlock 
-                Text="{Binding MinuteCalc}"
-                FontSize="30"
-                HorizontalAlignment="Center"
-                Foreground="#333333" 
-                FontWeight="Bold"
-                TextWrapping="Wrap"
-                Width="600"
-                TextAlignment="Left"
+                <TextBlock 
+                    Text="{Binding MinuteCalc}"
+                    FontSize="30"
+                    HorizontalAlignment="Center"
+                    Foreground="#333333" 
+                    FontWeight="Bold"
+                    TextWrapping="Wrap"
+                    Width="600"
+                    TextAlignment="Left"
                 
-            >
-            </TextBlock>
+                >
+                </TextBlock>
 
-            <TextBlock 
-                Text="{Binding SecondsCalc}"
-                FontSize="30"
-                HorizontalAlignment="Center"
-                Foreground="#333333" 
-                FontWeight="Bold"
-                TextWrapping="Wrap"
-                Width="600"
-                TextAlignment="Left"
-            >
-            </TextBlock>
-        </StackPanel>
+                <TextBlock 
+                    Text="{Binding SecondsCalc}"
+                    FontSize="30"
+                    HorizontalAlignment="Center"
+                    Foreground="#333333" 
+                    FontWeight="Bold"
+                    TextWrapping="Wrap"
+                    Width="600"
+                    TextAlignment="Left"
+                >
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

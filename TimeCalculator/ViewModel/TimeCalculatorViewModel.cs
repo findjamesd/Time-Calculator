@@ -34,6 +34,13 @@ namespace TimeCalculator.ViewModel
             set { displayResult = value; propertyChanged(); }
         }
 
+        private String borderControl = "#44AF69";
+        public String BorderControl
+        {
+            get { return borderControl; }
+            set { borderControl = value; propertyChanged(); }
+        }
+
         private string secondsCalc = "";
         public string SecondsCalc
         {
@@ -75,12 +82,13 @@ namespace TimeCalculator.ViewModel
         {
             ErrorMessage = message;
             ShowErrorMessage = isShow ? "Visible" : "Hidden";
+            BorderControl = isShow ? "#B1060F" : "#44AF69";
             ControlResultDisplay(false);
         }
 
         private void ControlResultDisplay(bool isShow)
         {
-            DisplayResult = isShow ? "Visible" : "Hidden"; ;
+            DisplayResult = isShow ? "Visible" : "Hidden";
         }
         #endregion
 
@@ -88,6 +96,43 @@ namespace TimeCalculator.ViewModel
         private long EmptyStringChecker()
         {
             return string.IsNullOrEmpty(UserInput) ? 0 : Int64.Parse(UserInput);
+        }
+        #endregion
+
+        #region Processing Calc function
+        private void ProcessCalculation(long seconds)
+        {
+            if (seconds >= SECONDS_IN_A_DAY)
+            {
+                DaysCalc = $"{seconds / SECONDS_IN_A_DAY} {(seconds / SECONDS_IN_A_DAY > 1 ? " Days" : " Day")}";
+                seconds = seconds % SECONDS_IN_A_DAY;
+            }
+            else
+            {
+                DaysCalc = "0 Day";
+            }
+
+            if (seconds >= SECONDS_IN_AN_HOUR)
+            {
+                HoursCalc = $"{seconds / SECONDS_IN_AN_HOUR} {(seconds / SECONDS_IN_AN_HOUR > 1 ? " Hours" : " Hour")}";
+                seconds = seconds % SECONDS_IN_AN_HOUR;
+            }
+            else
+            {
+                HoursCalc = "0 Hour";
+            }
+
+            if (seconds >= SECONDS_IN_A_MINUTE)
+            {
+                MinuteCalc = $"{seconds / SECONDS_IN_A_MINUTE} {(seconds / SECONDS_IN_A_MINUTE > 1 ? " Minutes" : " Minute")}";
+                seconds = seconds % SECONDS_IN_A_MINUTE;
+            }
+            else
+            {
+                MinuteCalc = "0 Minute";
+            }
+
+            SecondsCalc = $"{seconds} {(seconds > 1 ? " Seconds" : " Second")}";
         }
         #endregion
 
@@ -102,37 +147,7 @@ namespace TimeCalculator.ViewModel
 
                 long seconds = numOfSeconds;
 
-                if (seconds >= SECONDS_IN_A_DAY)
-                {
-                    DaysCalc = $"{seconds / SECONDS_IN_A_DAY} {(seconds / SECONDS_IN_A_DAY > 1 ? " Days" : " Day")}";
-                    seconds = seconds % SECONDS_IN_A_DAY;
-                }
-                else
-                {
-                    DaysCalc = "0 Day";
-                }
-
-                if (seconds >= SECONDS_IN_AN_HOUR)
-                {
-                    HoursCalc = $"{seconds / SECONDS_IN_AN_HOUR} {(seconds / SECONDS_IN_AN_HOUR > 1 ? " Hours" : " Hour")}";
-                    seconds = seconds % SECONDS_IN_AN_HOUR;
-                }
-                else
-                {
-                    HoursCalc = "0 Hour";
-                }
-
-                if (seconds >= SECONDS_IN_A_MINUTE)
-                {
-                    MinuteCalc = $"{seconds / SECONDS_IN_A_MINUTE} {(seconds / SECONDS_IN_A_MINUTE > 1 ? " Minutes" : " Minute")}";
-                    seconds = seconds % SECONDS_IN_A_MINUTE;
-                }
-                else
-                {
-                    MinuteCalc = "0 Minute";
-                }
-
-                SecondsCalc = $"{seconds} {(seconds > 1 ? " Seconds" : " Second")}";
+                ProcessCalculation(seconds);
 
                 ControlResultDisplay(true);
             }

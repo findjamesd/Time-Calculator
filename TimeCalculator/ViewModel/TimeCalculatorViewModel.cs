@@ -8,9 +8,9 @@ namespace TimeCalculator.ViewModel
 
     class TimeCalculatorViewModel : INotifyPropertyChanged
     {
-        const double MINUTE_BOUND = 60;
-        const double HOUR_BOUND = 3600;
-        const double DAY_BOUND = 86400;
+        const int SECONDS_IN_A_MINUTE = 60;
+        const int SECONDS_IN_AN_HOUR = 3600;
+        const int SECONDS_IN_A_DAY = 86400;
 
         #region Properties
         private String showErrorMessage = "Hidden";
@@ -34,13 +34,33 @@ namespace TimeCalculator.ViewModel
             set { displayResult = value; propertyChanged(); }
         }
 
-        private string calculationResult = "";
-        public string CalculationResult
+        private string secondsCalc = "";
+        public string SecondsCalc
         {
-            get { return calculationResult; }
-            set { calculationResult = value; propertyChanged(); }
+            get { return secondsCalc; }
+            set { secondsCalc = value; propertyChanged(); }
         }
 
+        private string minuteCalc = "";
+        public string MinuteCalc
+        {
+            get { return minuteCalc; }
+            set { minuteCalc = value; propertyChanged(); }
+        }
+
+        private string hoursCalc = "";
+        public string HoursCalc
+        {
+            get { return hoursCalc; }
+            set { hoursCalc = value; propertyChanged(); }
+        }
+
+        private string daysCalc = "";
+        public string DaysCalc
+        {
+            get { return daysCalc; }
+            set { daysCalc = value; propertyChanged(); }
+        }
         private String userInput = "";
         public String UserInput
         {
@@ -55,7 +75,7 @@ namespace TimeCalculator.ViewModel
         {
             ErrorMessage = message;
             ShowErrorMessage = isShow ? "Visible" : "Hidden";
-            CalculationResult = isShow.ToString();
+            ControlResultDisplay(false);
         }
 
         private void ControlResultDisplay(bool isShow)
@@ -65,14 +85,9 @@ namespace TimeCalculator.ViewModel
         #endregion
 
         #region Validation
-        private double ProcessCalculation(double numOfSeconds, double divisionParam)
+        private long EmptyStringChecker()
         {
-            return Math.Round(numOfSeconds / divisionParam, 2);
-        }
-
-        private double EmptyStringChecker()
-        {
-            return string.IsNullOrEmpty(UserInput) ? 0 : Double.Parse(UserInput);
+            return string.IsNullOrEmpty(UserInput) ? 0 : Int64.Parse(UserInput);
         }
         #endregion
 
@@ -83,37 +98,48 @@ namespace TimeCalculator.ViewModel
             {
                 DisplayErrorOnWrongInput(false, "");
 
-                double numOfSeconds = EmptyStringChecker();
+                long numOfSeconds = EmptyStringChecker();
 
-                double calcResult;
+                long seconds = numOfSeconds;
 
-                if (numOfSeconds >= MINUTE_BOUND)
+                if (seconds >= SECONDS_IN_A_DAY)
                 {
-                    calcResult = ProcessCalculation(numOfSeconds, MINUTE_BOUND);
-                    CalculationResult = $"You have {calcResult} {(calcResult > 1 ? "minutes" : "minute")} in {numOfSeconds} {(numOfSeconds > 1 ? "seconds" : "second")}";
-                    ControlResultDisplay(true);
-                }
-                else if (numOfSeconds >= HOUR_BOUND)
-                {
-                    calcResult = ProcessCalculation(numOfSeconds, HOUR_BOUND);
-                    CalculationResult = $"You have {calcResult} {(calcResult > 1 ? "hours" : "hour")} in {numOfSeconds} {(numOfSeconds > 1 ? "seconds" : "second")}";
-                    ControlResultDisplay(true);
-                }
-                else if (numOfSeconds >= DAY_BOUND)
-                {
-                    calcResult = ProcessCalculation(numOfSeconds, DAY_BOUND);
-                    CalculationResult = $"You have {calcResult} {(calcResult > 1 ? "days" : "day")} in {numOfSeconds} {(numOfSeconds > 1 ? "seconds" : "second")}";
-                    ControlResultDisplay(true);
+                    DaysCalc = $"{seconds / SECONDS_IN_A_DAY} {(seconds / SECONDS_IN_A_DAY > 1 ? " Days" : " Day")}";
+                    seconds = seconds % SECONDS_IN_A_DAY;
                 }
                 else
                 {
-                    CalculationResult = $"You have {numOfSeconds} {(numOfSeconds > 1 ? "seconds" : "second")}";
-                    ControlResultDisplay(true);
+                    DaysCalc = "0 Day";
                 }
+
+                if (seconds >= SECONDS_IN_AN_HOUR)
+                {
+                    HoursCalc = $"{seconds / SECONDS_IN_AN_HOUR} {(seconds / SECONDS_IN_AN_HOUR > 1 ? " Hours" : " Hour")}";
+                    seconds = seconds % SECONDS_IN_AN_HOUR;
+                }
+                else
+                {
+                    HoursCalc = "0 Hour";
+                }
+
+                if (seconds >= SECONDS_IN_A_MINUTE)
+                {
+                    MinuteCalc = $"{seconds / SECONDS_IN_A_MINUTE} {(seconds / SECONDS_IN_A_MINUTE > 1 ? " Minutes" : " Minute")}";
+                    seconds = seconds % SECONDS_IN_A_MINUTE;
+                }
+                else
+                {
+                    MinuteCalc = "0 Minute";
+                }
+
+                SecondsCalc = $"{seconds} {(seconds > 1 ? " Seconds" : " Second")}";
+
+                ControlResultDisplay(true);
             }
             catch
             {
                 DisplayErrorOnWrongInput(true, "Incorrect number was inputed");
+
                 ControlResultDisplay(false);
             }
         }
@@ -129,3 +155,4 @@ namespace TimeCalculator.ViewModel
         #endregion
     }
 }
+

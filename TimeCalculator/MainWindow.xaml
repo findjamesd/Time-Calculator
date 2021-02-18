@@ -21,6 +21,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
@@ -51,18 +52,11 @@
             Grid.Column="1"
             Grid.ColumnSpan="2"
             CornerRadius="15, 15, 15 15"
-            Padding="20 3 20 15"
+            Padding="20 15 20 15"
             VerticalAlignment="Top"
             Background="#333333" 
         >
             <StackPanel>
-                <Label
-                    Content="Enter a number of seconds"
-                    FontSize="18"
-                    HorizontalAlignment="Center"
-                    Foreground="#CBE1D2"
-                >
-                </Label>
                 <TextBox
                     Text="{Binding UserInput, UpdateSourceTrigger=PropertyChanged}"
                     FontSize="40"
@@ -100,25 +94,60 @@
 
         <StackPanel
             Grid.Row="3"
-            Grid.RowSpan="2"
+            Grid.RowSpan="3"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             Margin="0 30"
             HorizontalAlignment="Center"   
-            Name="spDisplayResult"
-            Orientation="Horizontal"
+            Orientation="Vertical"
             Visibility="{Binding DisplayResult}"
         >
             <TextBlock 
-                Text="{Binding CalculationResult}"
-                FontSize="40"
+                Text="{Binding DaysCalc}"
+                FontSize="30"
                 HorizontalAlignment="Center"
                 Foreground="#333333" 
                 FontWeight="Bold"
                 TextWrapping="Wrap"
                 Width="600"
-                TextAlignment="Center"
-                Visibility="{Binding DisplayResult}"
+                TextAlignment="Left"
+                
+            >
+            </TextBlock>
+            
+            <TextBlock 
+                Text="{Binding HoursCalc}"
+                FontSize="30"
+                Foreground="#333333" 
+                FontWeight="Bold"
+                TextWrapping="Wrap"
+                TextAlignment="Left"
+                
+            >
+            </TextBlock>
+
+            <TextBlock 
+                Text="{Binding MinuteCalc}"
+                FontSize="30"
+                HorizontalAlignment="Center"
+                Foreground="#333333" 
+                FontWeight="Bold"
+                TextWrapping="Wrap"
+                Width="600"
+                TextAlignment="Left"
+                
+            >
+            </TextBlock>
+
+            <TextBlock 
+                Text="{Binding SecondsCalc}"
+                FontSize="30"
+                HorizontalAlignment="Center"
+                Foreground="#333333" 
+                FontWeight="Bold"
+                TextWrapping="Wrap"
+                Width="600"
+                TextAlignment="Left"
             >
             </TextBlock>
         </StackPanel>
